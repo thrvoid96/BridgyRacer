@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Player1
+  - Player2
+  - Player3
+  - Player4
+  - Player1Block
+  - Player2Block
+  - Player3Block
+  - Player4Block
   layers:
   - Default
   - TransparentFX
@@ -11,8 +19,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Block
   - 
   - 
   - 
