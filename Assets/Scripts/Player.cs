@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    //This position is put into the rig for shake effect, can click on inspector to see where it is.
+    [SerializeField] private Transform stackStartPosition;
+
+    private Vector3 addedPos;
+    private bool isPlacing;
+    private Stack<GameObject> blockStack = new Stack<GameObject>();
     private Animator animator;
     private float time;
 
-    // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         handleIdleTime();
@@ -21,6 +25,7 @@ public class Player : MonoBehaviour
         handleRotation();
     }
 
+    //Rotate gameobject towards incoming input position
     private void handleRotation()
     {
         Vector3 currentPosition = transform.position;
@@ -32,6 +37,7 @@ public class Player : MonoBehaviour
         transform.LookAt(positionToLookAt);
     }
 
+    //Basic movement
     private void handleMovement()
     {
         animator.SetFloat("vertical", Input.GetAxis("Vertical"));
@@ -39,7 +45,7 @@ public class Player : MonoBehaviour
     }
 
     
-    //Needed when player is moving by 1 button. Because it was entering the idle state in between.
+    //When the player was turning 180 degrees, the velocity became 0 for a frame and the animator entered the idle state. Fix for that bug.
     private void handleIdleTime()
     {
         if (Input.GetAxis("Vertical") == 0f && Input.GetAxis("Horizontal") == 0f)
@@ -54,4 +60,39 @@ public class Player : MonoBehaviour
             animator.SetFloat("idleTime", time);
         }
     }
+
+    
+    private void OnTriggerEnter(Collider collider)
+    {
+        //Collect the block from the ground and add to the stack. Took me a while to perfect because using localpos and localrot didn't come to my mind first.
+        if(collider.tag.Contains(this.gameObject.tag + "Block"))
+        {
+            if (isPlacing)
+            {
+
+            }
+
+            var block = collider.gameObject;
+            block.transform.parent = stackStartPosition;            
+            block.transform.localPosition = addedPos;           
+            block.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            addedPos += new Vector3(0, 0.1f, 0);
+
+            blockStack.Push(block);           
+        }
+        else if (collider.CompareTag("Door"))
+        {
+            isPlacing = true;
+        }
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (collider.CompareTag("Door"))
+        {
+            isPlacing = false;
+        }
+    }
+
 }
