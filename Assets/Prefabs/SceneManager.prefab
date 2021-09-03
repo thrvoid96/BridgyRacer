@@ -45,11 +45,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 227af2e20337cac4f8863fc887751a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridSizeX: 12
-  gridSizeZ: 10
-  gridSpacingOffsetX: 0.7
-  gridSpacingOffsetZ: 0.7
-  gridOrigin: {x: -5.5, y: 0, z: -5}
+  playerCount: 4
+  grids:
+  - gridSizeX: 12
+    gridSizeZ: 10
+    gridSpacingOffsetX: 0.8
+    gridSpacingOffsetZ: 0.8
+    gridOrigin: {x: -4.4, y: -0.1, z: -4}
+  - gridSizeX: 10
+    gridSizeZ: 8
+    gridSpacingOffsetX: 0.8
+    gridSpacingOffsetZ: 0.8
+    gridOrigin: {x: -3.5, y: 4.9, z: 21}
+  - gridSizeX: 8
+    gridSizeZ: 5
+    gridSpacingOffsetX: 0.8
+    gridSpacingOffsetZ: 0.8
+    gridOrigin: {x: -2.5, y: 9.8, z: 45.5}
 --- !u!114 &5586069597477534114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,9 +75,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pools:
-  - tag: Block
+  - tag: Player1Blocks
     prefab: {fileID: 2288459739351975509, guid: b7c44081407c0f646ad0bde68126e3a4, type: 3}
-    size: 120
+    size: 1000
+  - tag: Player2Blocks
+    prefab: {fileID: 4963802332088884802, guid: eac4eb97d0259c34a99a3f4f77f79f4a, type: 3}
+    size: 1000
+  - tag: Player3Blocks
+    prefab: {fileID: 2063024471441581872, guid: ee4c4a53b41438f44b98c91efe7f454b, type: 3}
+    size: 1000
+  - tag: Player4Blocks
+    prefab: {fileID: 3669245775802413920, guid: 8103ab0fbbf8521489ea0f87eb9a5834, type: 3}
+    size: 1000
 --- !u!114 &535272885
 MonoBehaviour:
   m_ObjectHideFlags: 0

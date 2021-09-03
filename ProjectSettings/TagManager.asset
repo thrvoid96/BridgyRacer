@@ -12,6 +12,9 @@ TagManager:
   - Player2Block
   - Player3Block
   - Player4Block
+  - Door
+  - EmptyBlock
+  - PlacementArea
   layers:
   - Default
   - TransparentFX
@@ -19,15 +22,15 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
   - Block
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player1
+  - Player2
+  - Player3
+  - Player4
+  - Player1Stopper
+  - Player2Stopper
+  - Player3Stopper
+  - Player4Stopper
   - 
   - 
   - 
