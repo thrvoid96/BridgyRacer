@@ -62,17 +62,17 @@ public class Player : MonoBehaviour
     }
 
     
-    private void OnTriggerEnter(Collider collider)
+    private void OnTriggerEnter(Collider other)
     {
         //Collect the block from the ground and add to the stack. Took me a while to perfect because using localpos and localrot didn't come to my mind first.
-        if(collider.tag.Contains(this.gameObject.tag + "Block"))
+        if(other.tag.Contains(this.gameObject.tag + "Block"))
         {
             if (isPlacing)
             {
 
             }
 
-            var block = collider.gameObject;
+            var block = other.gameObject;
             block.transform.parent = stackStartPosition;            
             block.transform.localPosition = addedPos;           
             block.transform.localRotation = Quaternion.Euler(0, 0, 0);
@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
 
             blockStack.Push(block);           
         }
-        else if (collider.CompareTag("Door"))
+        else if (other.CompareTag("Door"))
         {
             isPlacing = true;
         }
@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (collider.CompareTag("Door"))
+        if (other.CompareTag("Door"))
         {
             isPlacing = false;
         }
