@@ -12,10 +12,12 @@ public class Player : MonoBehaviour
     private Vector3 addedPos;
     private bool isPlacing;
     private bool isFalling;
+    private bool isGrounded;
     private Stack<GameObject> blockStack = new Stack<GameObject>();
     private Animator animator;
     private Rigidbody rbody;
     private float time;
+    private LayerMask groundMask;
 
     public float knockbackForce = 3f;
 
@@ -24,16 +26,25 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         playerMat = GetComponentInChildren<SkinnedMeshRenderer>().material;
         rbody = GetComponent<Rigidbody>();
+
+        groundMask = LayerMask.GetMask("Ground","Block");
     }
 
     void Update()
     {
-        if (!isFalling)
+        checkIfGrounded();
+
+        if (!isFalling && isGrounded)
         {
             HandleIdleTime();
             HandleMovement();
             HandleRotation();
-        }
+        }     
+    }
+
+    private void checkIfGrounded()
+    {
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.5f, groundMask);
     }
 
     //Rotate gameobject towards incoming input position
@@ -125,7 +136,6 @@ public class Player : MonoBehaviour
                 }
 
                 addBlockToStack(other.gameObject);
-                Debug.LogError("b");
             }
             else 
             {
@@ -164,15 +174,17 @@ public class Player : MonoBehaviour
             */
 
             isFalling = true;
+            animator.applyRootMotion = false;
+            
 
             animator.SetTrigger("isFalling");
             animator.SetFloat("vertical", 0f);
             animator.SetFloat("horizontal", 0f);
             animator.SetFloat("idleTime", 0f);
 
-            rbody.AddExplosionForce(knockbackForce, collision.GetContact(0).point, 5f);
-            Debug.LogError(collision.GetContact(0).point);
-
+            var collisionPoint = collision.GetContact(0).point;
+            transform.LookAt(new Vector3(collisionPoint.x, transform.position.y, collisionPoint.z));
+            rbody.AddExplosionForce(knockbackForce, new Vector3(collisionPoint.x, transform.position.y, collisionPoint.z), 5f);
 
             addedPos = new Vector3(0, 0, 0);
             var count = blockStack.Count;
@@ -185,7 +197,6 @@ public class Player : MonoBehaviour
                 ObjectPooler.instance.SpawnFromPool("GreyBlocks", block.transform.position, block.transform.rotation, true);
                 block.transform.parent = null;
                 block.SetActive(false);
-                Debug.LogError("c");
             }
         }
 
@@ -194,13 +205,29 @@ public class Player : MonoBehaviour
                 var obj = ObjectPooler.instance.SpawnFromPool(this.gameObject.tag + "Blocks", stackStartPosition.position + addedPos, stackStartPosition.rotation, false);
                 addBlockToStack(obj);
                 collision.gameObject.SetActive(false);
-                Debug.LogError("a");
             }
     }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        var tag = collision.gameObject.tag;
+        if (tag.Contains("Floor") && !isGrounded)
+        {           
+            isFalling = true;
+            animator.applyRootMotion = false;
+
+            animator.SetTrigger("isFalling");
+            animator.SetFloat("vertical", 0f);
+            animator.SetFloat("horizontal", 0f);
+            animator.SetFloat("idleTime", 0f);
+        }
+    }
+
 
     public void setFallingFalse()
     {
         isFalling = false;
+        animator.applyRootMotion = true;
         animator.SetTrigger("fallingComplete");
     }
 }

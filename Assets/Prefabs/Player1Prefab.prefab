@@ -646,7 +646,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stackStartPosition: {fileID: 3910465961704024708}
   playerStopper: {fileID: 836397244879354295}
-  knockbackForce: 10000
+  knockbackForce: 1000
 --- !u!54 &6032681461867911835
 Rigidbody:
   m_ObjectHideFlags: 0

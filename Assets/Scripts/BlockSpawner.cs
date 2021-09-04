@@ -19,25 +19,20 @@ public class BlockSpawner : MonoBehaviour
 
     public int playerCount = 4;
     public List<Grid> grids;
-    
 
     private void Start()
     {
-        FirstSpawn();
+        spawnSelectedGrid(0);
     }
 
-    private void FirstSpawn()
+    public void spawnSelectedGrid(int gridIndex)
     {
-        foreach(Grid grid in grids)
-        {
-            randomizeSpawnPoint(grid);
+        randomizeSpawnPoint(grids[gridIndex]);
 
-            for(int i=1; i< playerCount + 1; i++)
-            {
-                spawnAllBlocksForPlayer(grid, i);
-            }
+        for (int i = 1; i < playerCount + 1; i++)
+        {
+            spawnAllBlocksForPlayer(grids[gridIndex], i);
         }
-        
     }
 
     private void randomizeSpawnPoint(Grid grid) {
