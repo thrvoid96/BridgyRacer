@@ -87,6 +87,9 @@ MonoBehaviour:
   - tag: Player4Blocks
     prefab: {fileID: 3669245775802413920, guid: 8103ab0fbbf8521489ea0f87eb9a5834, type: 3}
     size: 1000
+  - tag: GreyBlocks
+    prefab: {fileID: 7161263402842976156, guid: 46415e5174f454e45b09506bdb47be04, type: 3}
+    size: 1000
 --- !u!114 &535272885
 MonoBehaviour:
   m_ObjectHideFlags: 0

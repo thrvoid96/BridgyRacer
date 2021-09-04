@@ -11,21 +11,29 @@ public class Player : MonoBehaviour
     private Material playerMat;
     private Vector3 addedPos;
     private bool isPlacing;
+    private bool isFalling;
     private Stack<GameObject> blockStack = new Stack<GameObject>();
     private Animator animator;
+    private Rigidbody rbody;
     private float time;
+
+    public float knockbackForce = 3f;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         playerMat = GetComponentInChildren<SkinnedMeshRenderer>().material;
+        rbody = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-        HandleIdleTime();
-        HandleMovement();
-        HandleRotation();
+        if (!isFalling)
+        {
+            HandleIdleTime();
+            HandleMovement();
+            HandleRotation();
+        }
     }
 
     //Rotate gameobject towards incoming input position
@@ -64,63 +72,73 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void addBlockToStack(GameObject blockGameobj)
+    {
+        blockGameobj.transform.parent = stackStartPosition;
+        blockGameobj.transform.localPosition = addedPos;
+        blockGameobj.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+        addedPos += new Vector3(0, 0.1f, 0);
+
+        blockStack.Push(blockGameobj);
+    }
+
+    private void placeBlock(GameObject blockGameobj)
+    {
+        if (blockStack.Count > 0)
+        {
+            blockGameobj.GetComponent<MeshRenderer>().material = playerMat;
+            blockGameobj.tag = this.gameObject.tag + "Block";
+
+            var poppedObj = blockStack.Pop();
+            poppedObj.GetComponent<Block>().respawnCube(this.gameObject.tag + "Blocks");
+            poppedObj.SetActive(false);
+            addedPos -= new Vector3(0, 0.1f, 0);
+
+        }
+        else
+        {
+            //Move playerstopper into position
+            playerStopper.SetActive(true);
+            playerStopper.transform.position = new Vector3(blockGameobj.transform.position.x, blockGameobj.transform.position.y, blockGameobj.transform.position.z - 0.1f);
+        }
+    }
+
     
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag.Contains(this.gameObject.tag + "Block") || other.gameObject.CompareTag("GreyBlock"))                     
-        {           
-            //cant collect grey blocks if still placing
-            if (isPlacing)
-            {
-                return;
-            }
+        var collisionTag = other.tag;
 
-            //Collect the block from the ground and add to the stack. Took me a while to perfect because using localpos and localrot didn't come to my mind first.
-            var block = other.gameObject;
-
-            block.transform.parent = stackStartPosition;
-            block.transform.localPosition = addedPos;           
-            block.transform.localRotation = Quaternion.Euler(0, 0, 0);
-            addedPos += new Vector3(0, 0.1f, 0);
-
-            blockStack.Push(block);           
-        }
-
-        //If collided with other players blocks and also in placing state, 
-        else if (other.tag.Contains("Block"))
-        {
-            if (!isPlacing)
-            {
-                return;
-            }
-            var block = other.gameObject;
-
-            if (blockStack.Count > 0)
-            {
-                
-                block.GetComponent<MeshRenderer>().material = playerMat;
-                block.tag = this.gameObject.tag + "Block";
-                
-                var poppedObj = blockStack.Pop();
-                poppedObj.SetActive(false);
-                addedPos -= new Vector3(0, 0.1f, 0);
-
-            }
-            else
-            {
-                //Move playerstopper into position
-                playerStopper.SetActive(true);
-                playerStopper.transform.position = new Vector3(block.transform.position.x,block.transform.position.y,block.transform.position.z - 0.1f);               
-            }
-            
-        }
-                
-        else if (other.CompareTag("PlacementArea"))
+        if (other.CompareTag("PlacementArea"))
         {
             isPlacing = true;
             playerStopper.SetActive(false);
-        }
 
+        }
+        else if (collisionTag.Contains("Block") && !isFalling)
+        {
+             if (collisionTag.Contains(this.gameObject.tag))
+            {
+                if (isPlacing)
+                {
+                    return;
+                }
+
+                addBlockToStack(other.gameObject);
+                Debug.LogError("b");
+            }
+            else 
+            {
+
+                if (!isPlacing)
+                {
+                    return;
+                }
+
+                placeBlock(other.gameObject);
+            }
+
+        }    
     }
 
     private void OnTriggerExit(Collider other)
@@ -132,4 +150,57 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        var collisionTag = collision.gameObject.tag;
+
+        if (collisionTag.Contains("Player"))
+        {
+            /*var enemyPlayer = collision.gameObject.GetComponent<Player>();
+            if(enemyPlayer.blockStack.Count <= blockStack.Count)
+            {
+                return;
+            }
+            */
+
+            isFalling = true;
+
+            animator.SetTrigger("isFalling");
+            animator.SetFloat("vertical", 0f);
+            animator.SetFloat("horizontal", 0f);
+            animator.SetFloat("idleTime", 0f);
+
+            rbody.AddExplosionForce(knockbackForce, collision.GetContact(0).point, 5f);
+            Debug.LogError(collision.GetContact(0).point);
+
+
+            addedPos = new Vector3(0, 0, 0);
+            var count = blockStack.Count;
+
+            for(int i=0; i < count; i++)
+            {
+                var block = blockStack.Pop();
+                block.GetComponent<Block>().respawnCube(this.gameObject.tag + "Blocks");
+
+                ObjectPooler.instance.SpawnFromPool("GreyBlocks", block.transform.position, block.transform.rotation, true);
+                block.transform.parent = null;
+                block.SetActive(false);
+                Debug.LogError("c");
+            }
+        }
+
+        else if (collisionTag.Contains("Grey") && !isFalling)
+            {
+                var obj = ObjectPooler.instance.SpawnFromPool(this.gameObject.tag + "Blocks", stackStartPosition.position + addedPos, stackStartPosition.rotation, false);
+                addBlockToStack(obj);
+                collision.gameObject.SetActive(false);
+                Debug.LogError("a");
+            }
+    }
+
+    public void setFallingFalse()
+    {
+        isFalling = false;
+        animator.SetTrigger("fallingComplete");
+    }
 }

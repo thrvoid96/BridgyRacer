@@ -66,7 +66,7 @@ public class BlockSpawner : MonoBehaviour
             var z = grid.randomList[i] % grid.gridSizeZ;
                        
             Vector3 spawnPosition = new Vector3(x * grid.gridSpacingOffsetX, 0, z * grid.gridSpacingOffsetZ) + grid.gridOrigin;
-            ObjectPooler.instance.SpawnFromPool("Player"+ playerNum +"Blocks", spawnPosition, Quaternion.identity);
+            ObjectPooler.instance.SpawnFromPool("Player"+ playerNum +"Blocks", spawnPosition, Quaternion.identity, true);
         }
 
 
