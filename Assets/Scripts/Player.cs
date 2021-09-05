@@ -198,12 +198,13 @@ public class Player : MonoBehaviour
 
         if (collisionTag.Contains("Player"))
         {
-            /*var enemyPlayer = collision.gameObject.GetComponent<Player>();
+            var enemyPlayer = collision.gameObject.GetComponent<Player>();
+
             if(enemyPlayer.blockStack.Count <= blockStack.Count)
             {
                 return;
             }
-            */
+            
 
             isFalling = true;
             animator.applyRootMotion = false;

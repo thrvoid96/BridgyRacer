@@ -148,7 +148,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e4683502bbc98449ab0739c7ce9f09e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  renderersToChange:
+  - {fileID: 867891276345174216}
+  - {fileID: 2891718305912925939}
+  - {fileID: 4346987846413536583}
+  - {fileID: 8658278363207936199}
+  - {fileID: 867891275140308058}
+  - {fileID: 1252730393413683396}
   openAtStart: 0
+  lastDoor: 0
 --- !u!1 &566548033040764154
 GameObject:
   m_ObjectHideFlags: 0
