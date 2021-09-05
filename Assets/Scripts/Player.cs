@@ -7,6 +7,9 @@ public class Player : MonoBehaviour
     //This position is put into the rig for shake effect, can click on inspector to see where it is.
     [SerializeField] private Transform stackStartPosition;
     [SerializeField] private GameObject playerStopper;
+    [SerializeField] private float rotationSpeed = 3f;
+    [SerializeField] private float knockbackForce = 3f;
+    [SerializeField] private Vector3 gapBetweenCollectedBlocks;
 
     private Material playerMat;
     private Vector3 addedPos;
@@ -19,7 +22,7 @@ public class Player : MonoBehaviour
     private float time;
     private LayerMask groundMask;
 
-    public float knockbackForce = 3f;
+    
 
     void Start()
     {
@@ -44,19 +47,24 @@ public class Player : MonoBehaviour
 
     private void checkIfGrounded()
     {
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.5f, groundMask);
+        isGrounded = Physics.Raycast(transform.position + new Vector3(0f, 0.5f, 0f), Vector3.down, 1.5f, groundMask);
     }
 
-    //Rotate gameobject towards incoming input position
+    //Rotate gameobject towards incoming input position smoothly.
     private void HandleRotation()
     {
         Vector3 currentPosition = transform.position;
 
-        Vector3 newPosition = new Vector3(animator.GetFloat("horizontal"), 0, animator.GetFloat("vertical"));
+        Vector3 newPosition = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
         Vector3 positionToLookAt = currentPosition + newPosition;
+        if (newPosition != Vector3.zero)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(positionToLookAt - currentPosition);
 
-        transform.LookAt(positionToLookAt);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+        }
+
     }
 
     //Basic movement
@@ -83,13 +91,21 @@ public class Player : MonoBehaviour
         }
     }
 
+    public int getBlockCountOnPlayer()
+    {
+        return blockStack.Count;
+    }
+
     private void addBlockToStack(GameObject blockGameobj)
     {
+        var animator = blockGameobj.GetComponent<Animator>();
+        animator.enabled = false;
+
         blockGameobj.transform.parent = stackStartPosition;
         blockGameobj.transform.localPosition = addedPos;
         blockGameobj.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
-        addedPos += new Vector3(0, 0.1f, 0);
+        addedPos += gapBetweenCollectedBlocks;
 
         blockStack.Push(blockGameobj);
     }
@@ -104,7 +120,7 @@ public class Player : MonoBehaviour
             var poppedObj = blockStack.Pop();
             poppedObj.GetComponent<Block>().respawnCube(this.gameObject.tag + "Blocks");
             poppedObj.SetActive(false);
-            addedPos -= new Vector3(0, 0.1f, 0);
+            addedPos -= gapBetweenCollectedBlocks;
 
         }
         else
@@ -112,6 +128,22 @@ public class Player : MonoBehaviour
             //Move playerstopper into position
             playerStopper.SetActive(true);
             playerStopper.transform.position = new Vector3(blockGameobj.transform.position.x, blockGameobj.transform.position.y, blockGameobj.transform.position.z - 0.1f);
+        }
+    }
+
+    private void loseAllBlocks()
+    {
+        addedPos = new Vector3(0, 0, 0);
+        var count = blockStack.Count;
+
+        for (int i = 0; i < count; i++)
+        {
+            var block = blockStack.Pop();
+            block.GetComponent<Block>().respawnCube(this.gameObject.tag + "Blocks");
+
+            ObjectPooler.instance.SpawnFromPool("GreyBlocks", block.transform.position, block.transform.rotation, true);
+            block.transform.parent = null;
+            block.SetActive(false);
         }
     }
 
@@ -175,7 +207,6 @@ public class Player : MonoBehaviour
 
             isFalling = true;
             animator.applyRootMotion = false;
-            
 
             animator.SetTrigger("isFalling");
             animator.SetFloat("vertical", 0f);
@@ -186,18 +217,8 @@ public class Player : MonoBehaviour
             transform.LookAt(new Vector3(collisionPoint.x, transform.position.y, collisionPoint.z));
             rbody.AddExplosionForce(knockbackForce, new Vector3(collisionPoint.x, transform.position.y, collisionPoint.z), 5f);
 
-            addedPos = new Vector3(0, 0, 0);
-            var count = blockStack.Count;
-
-            for(int i=0; i < count; i++)
-            {
-                var block = blockStack.Pop();
-                block.GetComponent<Block>().respawnCube(this.gameObject.tag + "Blocks");
-
-                ObjectPooler.instance.SpawnFromPool("GreyBlocks", block.transform.position, block.transform.rotation, true);
-                block.transform.parent = null;
-                block.SetActive(false);
-            }
+            loseAllBlocks();
+            
         }
 
         else if (collisionTag.Contains("Grey") && !isFalling)
@@ -220,6 +241,8 @@ public class Player : MonoBehaviour
             animator.SetFloat("vertical", 0f);
             animator.SetFloat("horizontal", 0f);
             animator.SetFloat("idleTime", 0f);
+
+            loseAllBlocks();
         }
     }
 

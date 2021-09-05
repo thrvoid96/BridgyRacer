@@ -51,17 +51,17 @@ MonoBehaviour:
     gridSizeZ: 10
     gridSpacingOffsetX: 0.8
     gridSpacingOffsetZ: 0.8
-    gridOrigin: {x: -4.4, y: -0.1, z: -4}
+    gridOrigin: {x: -4.4, y: -0.5, z: -4}
   - gridSizeX: 10
     gridSizeZ: 8
     gridSpacingOffsetX: 0.8
     gridSpacingOffsetZ: 0.8
-    gridOrigin: {x: -3.5, y: 4.9, z: 21}
+    gridOrigin: {x: -3.5, y: 4.75, z: 21}
   - gridSizeX: 8
     gridSizeZ: 5
     gridSpacingOffsetX: 0.8
     gridSpacingOffsetZ: 0.8
-    gridOrigin: {x: -2.5, y: 9.8, z: 45.5}
+    gridOrigin: {x: -2.5, y: 9.7, z: 45.5}
 --- !u!114 &5586069597477534114
 MonoBehaviour:
   m_ObjectHideFlags: 0

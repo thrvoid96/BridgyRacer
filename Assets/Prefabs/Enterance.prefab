@@ -92,7 +92,6 @@ GameObject:
   - component: {fileID: 554306036277635088}
   - component: {fileID: 2015161745057996197}
   - component: {fileID: 5188541319921377559}
-  - component: {fileID: 8338578600711125113}
   m_Layer: 0
   m_Name: Enterance
   m_TagString: Door
@@ -149,26 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e4683502bbc98449ab0739c7ce9f09e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockSpawner: {fileID: 0}
-  sideDoors: []
-  oppositeDoors: []
-  gridToSpawn: 0
-  canSpawnGrid: 0
   openAtStart: 0
-  gridAlreadySpawned: 0
---- !u!65 &8338578600711125113
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 237544306326064049}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.3266089, y: 0.24465942, z: 0.3407631}
-  m_Center: {x: 0.07697952, y: -0.08943558, z: -0.14372063}
 --- !u!1 &566548033040764154
 GameObject:
   m_ObjectHideFlags: 0

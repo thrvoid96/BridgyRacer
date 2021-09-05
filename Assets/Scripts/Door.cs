@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    [SerializeField] private BlockSpawner blockSpawner;
-    [SerializeField] private Door[] sideDoors;
-    [SerializeField] private Door[] oppositeDoors;
-
-    public int gridToSpawn;
-    public bool canSpawnGrid;
     public bool openAtStart;
-    public bool gridAlreadySpawned;
     private Animator animator;
     private Door door;
+    private LayerMask blockMask;
+    private RaycastHit hit;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,36 +17,23 @@ public class Door : MonoBehaviour
 
         door = GetComponent<Door>();
 
+        blockMask = LayerMask.GetMask("Block");
+
         if (openAtStart)
         {
             openDoor();
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        if (other.gameObject.tag.Contains("Player"))
-        {            
-            if (!openAtStart)
+        Debug.DrawRay(transform.position + new Vector3(0f, 0.3f, -0.1f), Vector3.down * 1f, Color.green, 1f);
+        if (Physics.Raycast(transform.position + new Vector3(0f, 0.3f, -0.1f), Vector3.down, out hit, 1f, blockMask))
+        {
+            if (hit.collider.gameObject.tag.Contains("Player"))
             {
-                if (!gridAlreadySpawned && canSpawnGrid)
-                {
-                    blockSpawner.spawnSelectedGrid(gridToSpawn);
-
-                    for (int i = 0; i < sideDoors.Length; i++)
-                    {
-                        sideDoors[i].gridAlreadySpawned = true;
-                    }
-
-                    for (int i = 0; i < oppositeDoors.Length; i++)
-                    {
-                        oppositeDoors[i].openDoor();
-                    }
-                }
+                openDoor();
             }
-
-            openDoor();
-            door.enabled = false;
         }
     }
 
@@ -58,5 +41,6 @@ public class Door : MonoBehaviour
     public void openDoor()
     {
         animator.SetTrigger("isOpen");
+        door.enabled = false;
     }
 }

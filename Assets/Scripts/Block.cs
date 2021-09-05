@@ -10,6 +10,12 @@ public class Block : MonoBehaviour, IPooledObject
     private BoxCollider boxcol;
     private Rigidbody rb;
     private bool canSpawnAgain = true;
+    private Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     public void onObjectSpawn()
     {        
@@ -43,6 +49,11 @@ public class Block : MonoBehaviour, IPooledObject
         {
             ObjectPooler.instance.SpawnFromPool(cubeTag, startPos, Quaternion.identity, true);
         }
+    }
+
+    public void playCollectAnimation()
+    {
+        animator.SetTrigger("isCollecting");
     }
 
     private void OnTriggerEnter(Collider other)

@@ -22,7 +22,7 @@ public class BlockSpawner : MonoBehaviour
 
     private void Start()
     {
-        spawnSelectedGrid(0);
+        //spawnSelectedGrid(1);
     }
 
     public void spawnSelectedGrid(int gridIndex)
