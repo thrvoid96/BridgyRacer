@@ -110,6 +110,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f279f9a7dd9b5e45a4b79bef6878e25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bounceUpForce: 10
+  bounceSideForce: 2
+  speed: 0.1
+  smooth: 0.5
 --- !u!54 &-3107249115371459382
 Rigidbody:
   m_ObjectHideFlags: 0

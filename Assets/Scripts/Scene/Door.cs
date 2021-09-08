@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
+    //Script on doors to make them open/get player color.
+
     [SerializeField] private MeshRenderer[] renderersToChange;
+    [SerializeField] private UIManager uIManager;
     public bool openAtStart;
     public bool lastDoor;
     private Animator animator;
@@ -47,7 +50,7 @@ public class Door : MonoBehaviour
 
                 if (lastDoor)
                 {
-                    //game end;
+                    uIManager.endGame();
                 }
             }
         }

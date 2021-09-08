@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 119
   m_IsActive: 1
 --- !u!4 &155438116244922079
 Transform:
@@ -31,6 +31,101 @@ Transform:
   m_Father: {fileID: 6698972929236339164}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 30}
+--- !u!1 &3026502838355162268
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4611899247529083024}
+  - component: {fileID: 7824650671743098190}
+  - component: {fileID: 147892599472513816}
+  - component: {fileID: 8775999844956635526}
+  m_Layer: 15
+  m_Name: Ramp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967294
+  m_IsActive: 1
+--- !u!4 &4611899247529083024
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3026502838355162268}
+  m_LocalRotation: {x: -0.258819, y: 0, z: 0, w: 0.9659259}
+  m_LocalPosition: {x: 0.0651, y: 2.05, z: 4.44}
+  m_LocalScale: {x: 1.5882251, y: 0.3127, z: 10.069485}
+  m_Children: []
+  m_Father: {fileID: 6698972929236339164}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: -30, y: 0, z: 0}
+--- !u!33 &7824650671743098190
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3026502838355162268}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &147892599472513816
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3026502838355162268}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 4590ff8c67ffae443a251f92f480f5bf, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8775999844956635526
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3026502838355162268}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.1765285, z: 1}
+  m_Center: {x: 0, y: 0.08826417, z: 1.5198881e-10}
 --- !u!1 &3953391617423025302
 GameObject:
   m_ObjectHideFlags: 0
@@ -48,7 +143,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967294
+  m_StaticEditorFlags: 119
   m_IsActive: 1
 --- !u!4 &1068091606283071436
 Transform:
@@ -141,7 +236,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967294
+  m_StaticEditorFlags: 119
   m_IsActive: 1
 --- !u!4 &4129604740620336020
 Transform:
@@ -171,7 +266,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967294
+  m_StaticEditorFlags: 119
   m_IsActive: 1
 --- !u!4 &4638447695055976946
 Transform:
@@ -201,7 +296,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 119
   m_IsActive: 1
 --- !u!4 &8761751000288748813
 Transform:
@@ -232,7 +327,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 119
   m_IsActive: 1
 --- !u!4 &8085324023191119752
 Transform:
@@ -241,8 +336,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4885177774191965968}
-  m_LocalRotation: {x: -0.24644707, y: -0, z: -0, w: 0.96915627}
-  m_LocalPosition: {x: 0, y: 2.3, z: 4.84}
+  m_LocalRotation: {x: -0.2428185, y: -0.00048639494, z: -0.00034912655, w: 0.97007155}
+  m_LocalPosition: {x: 0, y: 2.35, z: 4.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7969723020949180332}
@@ -270,8 +365,8 @@ Transform:
   - {fileID: 2855418850909149666}
   - {fileID: 2229260470823486523}
   m_Father: {fileID: 6698972929236339164}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: -28.535, y: 0, z: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: -28.106, y: -0.05, z: -0.029}
 --- !u!1 &6698972929236339167
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,12 +376,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6698972929236339164}
-  m_Layer: 15
+  m_Layer: 0
   m_Name: DoorAndStair
-  m_TagString: Floor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 119
   m_IsActive: 1
 --- !u!4 &6698972929236339164
 Transform:
@@ -302,56 +397,12 @@ Transform:
   - {fileID: 6290856335788663946}
   - {fileID: 155438116244922079}
   - {fileID: 8761751000288748813}
-  - {fileID: 6668909884088031510}
   - {fileID: 8085324023191119752}
   - {fileID: 7214091138503748088}
+  - {fileID: 4611899247529083024}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7949077982905077219
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6668909884088031510}
-  - component: {fileID: 4881860962341678040}
-  m_Layer: 15
-  m_Name: RampCollider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
---- !u!4 &6668909884088031510
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7949077982905077219}
-  m_LocalRotation: {x: -0.258819, y: 0, z: 0, w: 0.9659259}
-  m_LocalPosition: {x: 0, y: 2.5, z: 5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6698972929236339164}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: -30, y: 0, z: 0}
---- !u!65 &4881860962341678040
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7949077982905077219}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.904249, y: 0.19444531, z: 10.305102}
-  m_Center: {x: 0.08721644, y: -0.010652523, z: -0.80833447}
 --- !u!1 &9022817432832939455
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +420,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967294
+  m_StaticEditorFlags: 119
   m_IsActive: 1
 --- !u!4 &3680815404523152249
 Transform:
@@ -503,6 +554,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stairBlock (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
 --- !u!4 &6425410266330983711 stripped
@@ -564,6 +619,10 @@ PrefabInstance:
     - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
       propertyPath: m_Name
       value: stairBlock (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
@@ -627,6 +686,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stairBlock (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
 --- !u!4 &4876399147235996003 stripped
@@ -688,6 +751,10 @@ PrefabInstance:
     - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
       propertyPath: m_Name
       value: stairBlock (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
@@ -751,6 +818,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stairBlock (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
 --- !u!4 &9198313623460897770 stripped
@@ -812,6 +883,10 @@ PrefabInstance:
     - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
       propertyPath: m_Name
       value: stairBlock (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
@@ -875,6 +950,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stairBlock (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
 --- !u!4 &8369671954688851241 stripped
@@ -936,6 +1015,10 @@ PrefabInstance:
     - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
       propertyPath: m_Name
       value: stairBlock (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
@@ -999,6 +1082,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stairBlock (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
 --- !u!4 &7979495170587621058 stripped
@@ -1060,6 +1147,10 @@ PrefabInstance:
     - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
       propertyPath: m_Name
       value: stairBlock
+      objectReference: {fileID: 0}
+    - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
@@ -1123,6 +1214,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stairBlock (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
 --- !u!4 &7777348520002632423 stripped
@@ -1184,6 +1279,10 @@ PrefabInstance:
     - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
       propertyPath: m_Name
       value: stairBlock (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
@@ -1247,6 +1346,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stairBlock (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
 --- !u!4 &7396843614611328943 stripped
@@ -1308,6 +1411,10 @@ PrefabInstance:
     - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
       propertyPath: m_Name
       value: stairBlock (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
@@ -1371,6 +1478,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stairBlock (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
 --- !u!4 &2229260470823486523 stripped
@@ -1432,6 +1543,10 @@ PrefabInstance:
     - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
       propertyPath: m_Name
       value: stairBlock (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
@@ -1495,6 +1610,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stairBlock (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
 --- !u!4 &2122685189639339244 stripped
@@ -1556,6 +1675,10 @@ PrefabInstance:
     - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
       propertyPath: m_Name
       value: stairBlock (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
@@ -1619,6 +1742,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stairBlock (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
 --- !u!4 &1229220218006763002 stripped
@@ -1635,7 +1762,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 237544306326064049, guid: 75fe995b8b59a48449e58df285de26c8, type: 3}
       propertyPath: m_Name
-      value: Enterance
+      value: BottomDoor
       objectReference: {fileID: 0}
     - target: {fileID: 554306036277635088, guid: 75fe995b8b59a48449e58df285de26c8, type: 3}
       propertyPath: m_RootOrder
@@ -1681,12 +1808,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5188541319921377559, guid: 75fe995b8b59a48449e58df285de26c8, type: 3}
-      propertyPath: openAtStart
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75fe995b8b59a48449e58df285de26c8, type: 3}
 --- !u!4 &6290856335788663946 stripped
 Transform:
@@ -1747,6 +1869,10 @@ PrefabInstance:
     - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
       propertyPath: m_Name
       value: stairBlock (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
@@ -1810,6 +1936,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stairBlock (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
 --- !u!4 &625900400493122268 stripped
@@ -1826,11 +1956,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 237544306326064049, guid: 75fe995b8b59a48449e58df285de26c8, type: 3}
       propertyPath: m_Name
-      value: Enterance (1)
+      value: TopDoor
       objectReference: {fileID: 0}
     - target: {fileID: 554306036277635088, guid: 75fe995b8b59a48449e58df285de26c8, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 554306036277635088, guid: 75fe995b8b59a48449e58df285de26c8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1934,6 +2064,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stairBlock (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
 --- !u!4 &3506624658080813333 stripped
@@ -1996,6 +2130,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stairBlock (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
 --- !u!4 &3374640886159852684 stripped
@@ -2057,6 +2195,10 @@ PrefabInstance:
     - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
       propertyPath: m_Name
       value: stairBlock (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6902646292516315583, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268a0b189612f1e48b375a0ddb4a7c99, type: 3}
