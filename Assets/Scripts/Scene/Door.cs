@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Script on doors to make them open and get player color.
+
 public class Door : MonoBehaviour
 {
-    //Script on doors to make them open/get player color.
-
+    
     [SerializeField] private MeshRenderer[] renderersToChange;
-    [SerializeField] private UIManager uIManager;
+    [SerializeField] private FinishGame finishGame;
     public bool openAtStart;
     public bool lastDoor;
     private Animator animator;
-    private Door door;
     private LayerMask blockMask;
     private RaycastHit hit;
     
@@ -20,8 +20,6 @@ public class Door : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-
-        door = GetComponent<Door>();
 
         blockMask = LayerMask.GetMask("Block");
 
@@ -50,7 +48,7 @@ public class Door : MonoBehaviour
 
                 if (lastDoor)
                 {
-                    uIManager.endGame();
+                    //finishGame.EndGame();
                 }
             }
         }
@@ -60,6 +58,6 @@ public class Door : MonoBehaviour
     public void openDoor()
     {
         animator.SetTrigger("isOpen");
-        door.enabled = false;
+        this.enabled = false;
     }
 }

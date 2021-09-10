@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OnEnterLevelSpawnBlocks : MonoBehaviour
+// When a player enters a level, spawn the grid and open doors accordingly. Script on each level.
+
+public class DoorAndGridManager : MonoBehaviour
 {
     [SerializeField] private Door[] doorsToOpen;
     [SerializeField] private BlockSpawner blockSpawner;

@@ -111,8 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bounceUpForce: 10
   bounceSideForce: 2
-  speed: 0.1
-  smooth: 0.5
+  speed: 0.2
 --- !u!95 &6361006823600339470
 Animator:
   serializedVersion: 3

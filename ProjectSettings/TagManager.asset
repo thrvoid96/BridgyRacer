@@ -27,18 +27,18 @@ TagManager:
   - Water
   - UI
   - Block
-  - Player0
-  - Player1
-  - Player2
-  - Player3
-  - Player0Stopper
-  - Player1Stopper
-  - Player2Stopper
-  - Player3Stopper
+  - Player
   - Ground
   - GroundCheck
-  - Player4
-  - Player4Stopper
+  - PlayerStopper
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

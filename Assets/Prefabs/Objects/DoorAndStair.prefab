@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 7824650671743098190}
   - component: {fileID: 147892599472513816}
   - component: {fileID: 8775999844956635526}
-  m_Layer: 15
+  m_Layer: 8
   m_Name: Ramp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3026502838355162268}
   m_LocalRotation: {x: -0.258819, y: 0, z: 0, w: 0.9659259}
-  m_LocalPosition: {x: 0.0651, y: 2.05, z: 4.44}
+  m_LocalPosition: {x: 0.0651, y: 2.08, z: 4.47}
   m_LocalScale: {x: 1.5882251, y: 0.3127, z: 10.069485}
   m_Children: []
   m_Father: {fileID: 6698972929236339164}
@@ -497,8 +497,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9306396, y: 5, z: 1.0000019}
-  m_Center: {x: 0.034680292, y: 3, z: 0.0000009685755}
+  m_Size: {x: 1.0027834, y: 5, z: 1.0000019}
+  m_Center: {x: -0.0013917185, y: 2.9999995, z: 0.0000009685754}
 --- !u!1001 &440841958443378128
 PrefabInstance:
   m_ObjectHideFlags: 0

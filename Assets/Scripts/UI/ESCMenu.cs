@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
+
 
 public class ESCMenu : MonoBehaviour
 {
     [SerializeField] private GameObject backGround;
+    [SerializeField] private TextMeshProUGUI firstPlaceText,secondPlaceText,ThirdPlaceText;
     private bool menuOpen;
     // Start is called before the first frame update
 
@@ -16,15 +19,22 @@ public class ESCMenu : MonoBehaviour
         {
             if (!menuOpen)
             {
-                backGround.SetActive(true);
-                menuOpen = true;
+                setMenuOpen(true);
             }
             else
             {
-                backGround.SetActive(false);
-                menuOpen = false;
+                setMenuOpen(false);
             }
         }
+    }
+
+    public void setFinalTexts(string firstPlace, string secondPlace, string thirdPlace)
+    {
+        firstPlaceText.text = firstPlace;
+        secondPlaceText.text = secondPlace;
+        ThirdPlaceText.text = thirdPlace;
+
+        gameEnd();
     }
 
     public void RestartScene()
@@ -34,8 +44,13 @@ public class ESCMenu : MonoBehaviour
 
     public void gameEnd()
     {
-        backGround.SetActive(true);
-        menuOpen = true;
+        setMenuOpen(true);
         Time.timeScale = 0f;
+    }
+
+    private void setMenuOpen(bool value)
+    {
+        backGround.SetActive(value);
+        menuOpen = value;
     }
 }

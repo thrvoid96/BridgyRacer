@@ -29,6 +29,14 @@ public class AIPlayer : CommonBehaviours
     protected override void Update()
     {
         base.Update();
+
+        //Weird bug because navmeshagent with rigiddbody collisions sometimes send AI's flying.
+        if (gameObject.transform.position.y <= -5f)
+        {
+            navMeshAgent.enabled = false;
+            this.enabled = false;
+        }
+
         _stateMachine.Tick();
     }
 
@@ -41,20 +49,19 @@ public class AIPlayer : CommonBehaviours
         var idleState = new IdleState(this, animator, navMeshAgent);
         var falling = new FallingState(this, animator, navMeshAgent);
 
-        At(collectBlocks, falling, Falling(true));
-        At(collectBlocks, goTowardsEnd, tooLessBlocks(false));
-        At(idleState, collectBlocks, tooLessBlocks(true));
+        At(collectBlocks, goTowardsEnd, tooFewBlocks(false));
+        At(idleState, collectBlocks, tooFewBlocks(true));
         At(goTowardsEnd, collectBlocks, ZeroBlocks());
         At(falling, collectBlocks, Falling(false));
 
-        //_stateMachine.AddAnyTransition(enemyDead, Falling());
+        _stateMachine.AddAnyTransition(falling, Falling(true));
 
 
         void At(IState from, IState to, Func<bool> condition) => _stateMachine.AddTransition(from, to, condition);
 
         _stateMachine.SetState(idleState);
 
-        Func<bool> tooLessBlocks(bool value)
+        Func<bool> tooFewBlocks(bool value)
         {
             return delegate
             {

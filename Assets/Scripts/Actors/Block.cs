@@ -7,7 +7,6 @@ public class Block : MonoBehaviour, IPooledObject
     [SerializeField] private float bounceUpForce = 10f;
     [SerializeField] private float bounceSideForce = 2f;
     [SerializeField] private float speed = 0.3f;
-    [SerializeField] private float smooth = 1f;
     private Vector3 startPos;
 
     private BoxCollider boxcol;
@@ -62,11 +61,6 @@ public class Block : MonoBehaviour, IPooledObject
             animator.enabled = false;
         }
 
-    }
-
-    public void playCollectAnimation()
-    {
-        animator.SetTrigger("isCollecting");
     }
 
     public void moveTowards(Transform stackTransform, Vector3 addedPosition)

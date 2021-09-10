@@ -15,4 +15,9 @@ public class UIManager : MonoBehaviour
     {
         escMenu.gameEnd();
     }
+
+    public void setEndTexts(string firstPlace, string secondPlace, string thirdPlace)
+    {
+        escMenu.setFinalTexts(firstPlace,secondPlace,thirdPlace);
+    }
 }

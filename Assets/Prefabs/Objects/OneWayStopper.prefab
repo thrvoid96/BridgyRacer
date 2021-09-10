@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6971388379024273935}
   - component: {fileID: 6971388379024273934}
   m_Layer: 0
-  m_Name: OneWayStopper (1)
+  m_Name: OneWayStopper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

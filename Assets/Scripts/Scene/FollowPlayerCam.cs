@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Behaviours;
 
 public class FollowPlayerCam : MonoBehaviour
 {
-    [SerializeField] private GameObject playerToFollow;
-    private Player player;
+    [SerializeField] private CommonBehaviours playerToFollow;
     private Camera cam;
     private int playerBlockCount;
     public Vector3 offsetValues;
@@ -13,7 +13,6 @@ public class FollowPlayerCam : MonoBehaviour
 
     private void Start()
     {
-       player = playerToFollow.GetComponent<Player>();
        cam = GetComponent<Camera>();
     }
 
@@ -21,20 +20,20 @@ public class FollowPlayerCam : MonoBehaviour
     {
         transform.position = playerToFollow.transform.position + offsetValues;
 
-        if (player.getBlockCountOnPlayer() > playerBlockCount)
+        if (playerToFollow.blockStackCount > playerBlockCount)
         {
             if(cam.fieldOfView < 40)
             {
                 cam.fieldOfView += 0.25f;
-                playerBlockCount = player.getBlockCountOnPlayer();
+                playerBlockCount = playerToFollow.blockStackCount;
             }
         }
-        else if (player.getBlockCountOnPlayer() < playerBlockCount)
+        else if (playerToFollow.blockStackCount < playerBlockCount)
         {
             if (cam.fieldOfView > 30)
             {
                 cam.fieldOfView -= 0.25f;
-                playerBlockCount = player.getBlockCountOnPlayer();
+                playerBlockCount = playerToFollow.blockStackCount;
             }
         }
         

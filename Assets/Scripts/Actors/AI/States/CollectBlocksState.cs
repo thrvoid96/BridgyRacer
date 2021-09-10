@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
+//OnEnter get block positions and collect them.
 public class CollectBlocksState : IState
 {
     private Animator _animator;
@@ -76,7 +77,16 @@ public class CollectBlocksState : IState
         }
 
         // Set the agent to go to the currently selected destination
-        _navMeshAgent.destination = destinations[0];
+        try
+        {
+            _navMeshAgent.destination = destinations[0];
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+            _aIPlayer.enabled = false;
+        }
+        
         //Debug.LogError(destinations[0]);
 
         // Remove reached destination

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+//Combine same behaviours between Player and AI.
+
 namespace Behaviours
 {
     public abstract class CommonBehaviours : MonoBehaviour
@@ -10,7 +12,7 @@ namespace Behaviours
         #region SerializeFields
         [SerializeField] protected Vector3 gapBetweenCollectedBlocks;
         [SerializeField] protected Transform stackStartTransform;
-        [SerializeField] protected GameObject playerStopper;      
+        [SerializeField] protected GameObject playerStopper;
         [SerializeField] protected float knockbackForce = 3f;
         #endregion
 
@@ -18,9 +20,28 @@ namespace Behaviours
         protected Rigidbody rbody;
         protected Material playerMat;
         protected Animator animator;
+        private BlockInteractions blockInteractions = new BlockInteractions();
         #endregion
 
         #region Variables
+        public Vector3 nextBlockPosition
+        {
+            get { return addedPos; }
+            set { addedPos = value; }
+        }
+
+        public Vector3 lastBlockPlacedPosition
+        {
+            get { return lastBlockPos; }
+            set { lastBlockPos = value; }
+        }
+
+        public int blockStackCount
+        {
+            get { return blockStack.Count; }
+        }
+
+        protected Vector3 lastBlockPos;
         protected Vector3 addedPos;
         protected bool isPlacing;
         protected bool isFalling;
@@ -35,7 +56,7 @@ namespace Behaviours
             animator = GetComponent<Animator>();
             playerMat = GetComponentInChildren<SkinnedMeshRenderer>().material;
             rbody = GetComponent<Rigidbody>();
-            groundMask = LayerMask.GetMask("Ground", "Block");
+            groundMask = LayerMask.GetMask("Ground");
         }
 
         protected virtual void Start()
@@ -49,64 +70,10 @@ namespace Behaviours
         }
 
 
-        public int getBlockCountOnPlayer()
-        {
-            return blockStack.Count;
-        }
-
         private void checkIfGrounded()
         {
             isGrounded = Physics.Raycast(transform.position + new Vector3(0f, 0.5f, 0f), Vector3.down, 1.5f, groundMask);
         }
-
-        private void addBlockToStack(Block block)
-        {
-            block.disableAnimator();
-
-            block.moveTowards(stackStartTransform, addedPos);
-
-            addedPos += gapBetweenCollectedBlocks;
-
-            blockStack.Push(block);
-        }
-
-        private void placeBlock(GameObject block)
-        {
-            if (blockStack.Count > 0)
-            {
-                block.GetComponent<MeshRenderer>().material = playerMat;
-                block.tag = this.gameObject.tag + "Block";
-
-                var poppedObj = blockStack.Pop();
-                poppedObj.respawnCube(this.gameObject.tag + "Blocks");
-                poppedObj.Inactivate();
-
-                addedPos -= gapBetweenCollectedBlocks;
-
-            }
-            else
-            {
-                playerStopper.SetActive(true);
-                playerStopper.transform.position = new Vector3(block.gameObject.transform.position.x, block.gameObject.transform.position.y, block.gameObject.transform.position.z - 0.1f);
-            }
-        }
-
-        private void loseAllBlocks()
-        {
-            addedPos = new Vector3(0, 0, 0);
-            var count = blockStack.Count;
-
-            for (int i = 0; i < count; i++)
-            {
-                var block = blockStack.Pop();
-                block.respawnCube(this.gameObject.tag + "Blocks");
-
-                ObjectPooler.instance.SpawnFromPool("GreyBlocks", block.transform.position, block.transform.rotation, true);
-                block.transform.parent = null;
-                block.Inactivate();
-            }
-        }
-
 
         private void OnTriggerEnter(Collider other)
         {
@@ -124,18 +91,18 @@ namespace Behaviours
 
                 if (collisionTag.Contains(this.gameObject.tag))
                 {
-                    if (isPlacing)
+                    if (isPlacing || block == null)
                     {
                         return;
                     }
-                    addBlockToStack(block);
+                    blockInteractions.addBlockToStack(this, block, stackStartTransform, gapBetweenCollectedBlocks, blockStack);
                 }
                 else if (collisionTag.Contains("Grey"))
                 {
                     var obj = ObjectPooler.instance.SpawnFromPool(this.gameObject.tag + "Blocks", stackStartTransform.position + addedPos, stackStartTransform.rotation, false);
                     var spawnedBlock = obj.GetComponent<Block>();
 
-                    addBlockToStack(spawnedBlock);
+                    blockInteractions.addBlockToStack(this, spawnedBlock, stackStartTransform, gapBetweenCollectedBlocks, blockStack);
                     block.Inactivate();
                 }
                 else
@@ -146,38 +113,35 @@ namespace Behaviours
                         return;
                     }
 
-                    placeBlock(other.gameObject);
+                    blockInteractions.placeBlock(this,other.gameObject,playerMat,gameObject.tag,gapBetweenCollectedBlocks,blockStack,playerStopper);
                 }
 
             }
-            else if (collisionTag.Contains("Player"))
+            else if (collisionTag.Contains("Player") && !isFalling)
             {
                 var enemyPlayer = other.gameObject.GetComponent<CommonBehaviours>();
-                //Debug.LogError(enemyPlayer);
 
-                if (enemyPlayer.blockStack.Count <= blockStack.Count)
+                if (enemyPlayer.blockStackCount <= blockStackCount)
                 {
                     return;
                 }
 
+                setAnimatorFalling();
 
-                isFalling = true;
-                //animator.applyRootMotion = false;
-
-                animator.SetTrigger("isFalling");
-                animator.SetFloat("vertical", 0f);
-                animator.SetFloat("horizontal", 0f);
-                animator.SetFloat("idleTime", 0f);
-
-                var collisionPoint = enemyPlayer.transform.position;
-                transform.LookAt(new Vector3(collisionPoint.x, transform.position.y, collisionPoint.z));
-                rbody.AddExplosionForce(knockbackForce, new Vector3(collisionPoint.x, transform.position.y, collisionPoint.z), 5f);
-
-                loseAllBlocks();
+                getKnockedBack(enemyPlayer);
 
             }
 
 
+        }
+
+        private void getKnockedBack(CommonBehaviours enemyPlayer)
+        {
+            var collisionPoint = enemyPlayer.transform.position;
+            transform.LookAt(new Vector3(collisionPoint.x, transform.position.y, collisionPoint.z));
+            rbody.AddExplosionForce(knockbackForce, new Vector3(collisionPoint.x, transform.position.y, collisionPoint.z), 5f);
+
+            blockInteractions.loseAllBlocks(this, gameObject.tag, blockStack);
         }
 
         private void OnTriggerExit(Collider other)
@@ -193,25 +157,37 @@ namespace Behaviours
         private void OnCollisionExit(Collision collision)
         {
             var tag = collision.gameObject.tag;
-            if (tag.Contains("Floor") && !isGrounded)
+            if (tag.Contains("Floor") && !isGrounded && !isFalling)
             {
-                isFalling = true;
-                //animator.applyRootMotion = false;
+                setAnimatorFalling();
+                blockInteractions.loseAllBlocks(this, gameObject.tag, blockStack);
+            }
+        }
 
-                animator.SetTrigger("isFalling");
-                animator.SetFloat("vertical", 0f);
-                animator.SetFloat("horizontal", 0f);
-                animator.SetFloat("idleTime", 0f);
+        private void setAnimatorFalling()
+        {
+            isFalling = true;
+            
+            animator.SetTrigger("isFalling");
+            animator.SetFloat("vertical", 0f);
+            animator.SetFloat("horizontal", 0f);
+            animator.SetFloat("idleTime", 0f);
 
-                loseAllBlocks();
+            if (gameObject.GetComponent<Player>())
+            {
+                animator.applyRootMotion = false;
             }
         }
 
         public void setFallingFalse()
         {
             isFalling = false;
-            //animator.applyRootMotion = true;
             animator.SetTrigger("fallingComplete");
+
+            if (gameObject.GetComponent<Player>())
+            {
+                animator.applyRootMotion = true;
+            }
         }
     }
 }

@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 2015161745057996197}
   - component: {fileID: 5188541319921377559}
   m_Layer: 0
-  m_Name: Enterance
+  m_Name: Door
   m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -155,6 +155,7 @@ MonoBehaviour:
   - {fileID: 8658278363207936199}
   - {fileID: 867891275140308058}
   - {fileID: 1252730393413683396}
+  uIManager: {fileID: 0}
   openAtStart: 1
   lastDoor: 0
 --- !u!1 &566548033040764154
