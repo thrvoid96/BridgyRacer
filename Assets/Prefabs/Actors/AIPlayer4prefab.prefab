@@ -1274,7 +1274,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5249938597688013650}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.0563, z: 0}
+  m_LocalPosition: {x: 0, y: 0.0563, z: 0.05}
   m_LocalScale: {x: 0.3, y: 0.01, z: 0.3}
   m_Children: []
   m_Father: {fileID: 6365674982216680218}
@@ -1466,7 +1466,7 @@ GameObject:
   - component: {fileID: 8490425374162314191}
   m_Layer: 7
   m_Name: AIPlayer4
-  m_TagString: Player4
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1571,13 +1571,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5b7443781e1e64aac1b3aead0394a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerNum: 4
   gapBetweenCollectedBlocks: {x: 0, y: 0.125, z: 0}
   stackStartTransform: {fileID: 9124085329937019101}
   playerStopper: {fileID: 4846151968844309486}
   knockbackForce: 3
+  playerSkinRenderer: {fileID: 7348984555115808352}
   finalPosition: {fileID: 0}
   blockSpawner: {fileID: 0}
-  currentGrid: 0
+  currentGrid: -1
 --- !u!1 &6439118208738902818
 GameObject:
   m_ObjectHideFlags: 0
@@ -1650,7 +1652,7 @@ GameObject:
   - component: {fileID: 1541706338535188888}
   m_Layer: 0
   m_Name: AIPlayer4prefab
-  m_TagString: Player4
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -1,22 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BlockBehaviour;
 
-public class Block : MonoBehaviour, IPooledObject
+
+public class Block : BlockBehaviours, IPooledObject
 {    
     [SerializeField] private float bounceUpForce = 10f;
     [SerializeField] private float bounceSideForce = 2f;
     [SerializeField] private float speed = 0.3f;
-    private Vector3 startPos;
 
-    private BoxCollider boxcol;
-    private Rigidbody rb;
-    private Animator animator;
+    private Vector3 startPos;
     private bool canSpawnAgain = true;
 
-    private void Awake()
+    private BoxCollider boxcol;
+    private ParticleSystem particleSys;
+    private Rigidbody rb;
+    private Animator animator;
+
+    public virtual void Awake()
     {
         animator = GetComponent<Animator>();
+        particleSys = GetComponentInChildren<ParticleSystem>();
         boxcol = GetComponent<BoxCollider>();
         rb = GetComponent<Rigidbody>();
     }
@@ -24,18 +29,22 @@ public class Block : MonoBehaviour, IPooledObject
     {
         StopAllCoroutines();
 
-        startPos = transform.position;     
+        startPos = transform.position;
 
         boxcol.enabled = true;
-        
-        if (this.gameObject.tag.Contains("Grey"))
+
+        particleSys.Stop();
+
+        if (this.gameObject.CompareTag("GreyBlock"))
         {
             float xForce = Random.Range(-bounceSideForce, bounceSideForce);
             float yForce = Random.Range(bounceUpForce / 2f, bounceUpForce);
             float zForce = Random.Range(-bounceSideForce, bounceSideForce);
 
+            transform.rotation = Random.rotation;
+
             Vector3 force = new Vector3(xForce, yForce, zForce);
-            
+
             rb.velocity = force;
         }
 
@@ -66,7 +75,8 @@ public class Block : MonoBehaviour, IPooledObject
     public void moveTowards(Transform stackTransform, Vector3 addedPosition)
     {
         boxcol.enabled = false;
-        StartCoroutine(moveTowardsDestination(stackTransform,addedPosition));
+        particleSys.Play();
+        StartCoroutine(moveTowardsDestination(stackTransform, addedPosition));
     }
 
     public void Inactivate()
@@ -88,11 +98,18 @@ public class Block : MonoBehaviour, IPooledObject
     {
         while (true)
         {
-            var FinalDestination = stackTransform.position + addedPosition;
+           
+            var FinalDestination = stackTransform.position + (addedPosition * 2);
+
+          /*Debug.LogError(stackTransform.position);
+            Debug.LogError(addedPosition);
+            Debug.LogError(FinalDestination);
+          */
+
             var distance = Vector3.Distance(transform.position, FinalDestination);
 
 
-            if (distance >= 0.1f)
+            if (distance >= 0.03f)
             {
                 // Rotate in arc
                 SmoothLookAt(FinalDestination);
@@ -100,8 +117,8 @@ public class Block : MonoBehaviour, IPooledObject
                 // Move               
                 //transform.LookAt(FinalDestination, Vector3.up);
                 //transform.Translate (speed * transform.forward);
-                
-                transform.position = Vector3.MoveTowards(transform.position, stackTransform.position + addedPosition, speed);
+
+                transform.position = Vector3.MoveTowards(transform.position, stackTransform.position + (addedPosition * 2), speed + distance/10);
                 yield return null;
             }
             else
@@ -109,9 +126,10 @@ public class Block : MonoBehaviour, IPooledObject
                 transform.parent = stackTransform;
                 transform.localRotation = Quaternion.Euler(0, 0, 0);
                 transform.localPosition = addedPosition;
+                particleSys.Stop();
                 yield break;
             }
-            
+
         }
     }
 
@@ -119,7 +137,8 @@ public class Block : MonoBehaviour, IPooledObject
     {
         Vector3 dir = target - transform.position;
         //Quaternion targetRotation = Quaternion.LookRotation(dir);
-        transform.rotation = Quaternion.LookRotation(dir, Vector3.up);
+        transform.rotation = Quaternion.LookRotation(dir);
     }
-    
+
 }
+

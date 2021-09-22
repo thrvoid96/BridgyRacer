@@ -10,9 +10,8 @@ public class AIPlayer : CommonBehaviours
     [SerializeField] private Transform finalPosition;
     [SerializeField] private BlockSpawner blockSpawner;
 
-    public int currentGrid = 0;
+    public int currentGrid;
     private bool collecting;
-    private bool once;
     private GameObject lastFloor;
 
     private NavMeshAgent navMeshAgent;
@@ -93,14 +92,9 @@ public class AIPlayer : CommonBehaviours
     {
         if(collision.gameObject.tag == "Floor" && collision.gameObject != lastFloor)
         {
-            if (once)
-            {
-                currentGrid++;
-            }
-
+            currentGrid++;
             lastFloor = collision.gameObject;                    
             collecting = true;
-            once = true;
         }
     }
 

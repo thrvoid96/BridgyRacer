@@ -39,7 +39,12 @@ public class ESCMenu : MonoBehaviour
 
     public void RestartScene()
     {
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadSceneAsync("Level1");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     public void gameEnd()

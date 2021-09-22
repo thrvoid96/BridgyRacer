@@ -18,12 +18,20 @@ public class BlockSpawner : MonoBehaviour
         [System.NonSerialized] public Dictionary<int,List<Vector3>> blockPositions = new Dictionary<int, List<Vector3>>();
     }
 
-    [SerializeField] private int playerCount = 4;
+    [SerializeField] private int playerCount = 5;
     public List<Grid> grids;
 
     private void Start()
     {
-        //spawnSelectedGrid(2);
+        foreach(Grid grid in grids)
+        {
+            randomizeSpawnPoints(grid);
+
+            for (int i = 0; i < playerCount; i++)
+            {
+                setBlockSpawnPositions(grid, i);
+            }
+        }        
     }
 
     public List<Vector3> getBlockPositionsForPlayer(int gridIdx, int playerNumber)
@@ -31,17 +39,7 @@ public class BlockSpawner : MonoBehaviour
         return grids[gridIdx].blockPositions[playerNumber];
     }
 
-    public void spawnSelectedGrid(int gridIndex)
-    {
-        randomizeSpawnPoint(grids[gridIndex]);
-
-        for (int i = 0; i < playerCount; i++)
-        {
-            spawnAllBlocksForPlayer(grids[gridIndex], i);
-        }
-    }
-
-    private void randomizeSpawnPoint(Grid grid) {
+    private void randomizeSpawnPoints(Grid grid) {
 
         List<int> uniqueNumbers = new List<int>();
 
@@ -57,23 +55,32 @@ public class BlockSpawner : MonoBehaviour
         }
     }
 
-    private void spawnAllBlocksForPlayer(Grid grid, int playerNum)
+    private void setBlockSpawnPositions(Grid grid, int playerNum)
     {
         var longNum = grid.randomList.Count / playerCount;
         var list = new List<Vector3>();
 
-        for (int i= playerNum * longNum; i< (playerNum + 1) * longNum; i++)
+        for (int i = playerNum * longNum; i < (playerNum + 1) * longNum; i++)
         {
-            var x = Mathf.FloorToInt(grid.randomList[i]/grid.gridSizeZ);
+            var x = Mathf.FloorToInt(grid.randomList[i] / grid.gridSizeZ);
             var z = grid.randomList[i] % grid.gridSizeZ;
-                       
+
             Vector3 spawnPosition = new Vector3(x * grid.gridSpacingOffsetX, 0, z * grid.gridSpacingOffsetZ) + grid.gridOrigin;
-            var obj = ObjectPooler.instance.SpawnFromPool("Player"+ playerNum +"Blocks", spawnPosition, Quaternion.identity, true);
-            list.Add(obj.transform.position);
+            list.Add(spawnPosition);
         }
 
-        grid.blockPositions.Remove(playerNum);
         grid.blockPositions.Add(playerNum, list);
+
+    }
+
+    public void spawnAllBlocksForPlayer(int playerNum, int gridIndex)
+    {
+        var longNum = grids[gridIndex].randomList.Count / playerCount;
+
+        for (int i = 0; i< longNum; i++)
+        {
+            ObjectPooler.instance.SpawnFromPool("Player"+ playerNum +"Blocks", grids[gridIndex].blockPositions[playerNum][i], Quaternion.identity, true);
+        }
 
     }
 }

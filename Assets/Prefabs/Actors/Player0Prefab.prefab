@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 292432139}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.0563, z: 0}
+  m_LocalPosition: {x: 0, y: 0.0563, z: 0.05}
   m_LocalScale: {x: 0.3, y: 0.01, z: 0.3}
   m_Children: []
   m_Father: {fileID: 1192588575405611331}
@@ -592,7 +592,7 @@ GameObject:
   - component: {fileID: 1784731818131488286}
   m_Layer: 7
   m_Name: Player0
-  m_TagString: Player0
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -605,7 +605,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2001634878961861625}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.2, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 2063750888790619012}
@@ -645,10 +645,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ec36811624ef3f4db522d67a719a37a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerNum: 0
   gapBetweenCollectedBlocks: {x: 0, y: 0.125, z: 0}
   stackStartTransform: {fileID: 3910465961704024708}
   playerStopper: {fileID: 836397244879354295}
   knockbackForce: 5000
+  playerSkinRenderer: {fileID: 3253659222161939513}
   rotationSpeed: 20
 --- !u!54 &6032681461867911835
 Rigidbody:

@@ -31,7 +31,7 @@ public class CollectBlocksState : IState
         _animator.SetFloat("vertical", 1f);
         _animator.SetFloat("idleTime", 0f);
         blockMask = LayerMask.GetMask("Block");
-        var list = _blockSpawner.getBlockPositionsForPlayer(_aIPlayer.currentGrid, Int32.Parse(_aIPlayer.gameObject.tag.Replace("Player", "")));
+        var list = _blockSpawner.getBlockPositionsForPlayer(_aIPlayer.currentGrid, _aIPlayer.getPlayerNum);
 
         for (int i=0; i< list.Count; i++)
         {

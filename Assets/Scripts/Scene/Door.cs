@@ -9,6 +9,8 @@ public class Door : MonoBehaviour
     
     [SerializeField] private MeshRenderer[] renderersToChange;
     [SerializeField] private FinishGame finishGame;
+    private ParticleSystem[] sphereParticles;
+    private StairBlock stairBlock;
     public bool openAtStart;
     public bool lastDoor;
     private Animator animator;
@@ -20,12 +22,22 @@ public class Door : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        sphereParticles = GetComponentsInChildren<ParticleSystem>();
+        for(int i=0; i< sphereParticles.Length; i++)
+        {
+            sphereParticles[i].Stop();
+        }
 
         blockMask = LayerMask.GetMask("Block");
 
         if (openAtStart)
         {
             openDoor();
+        }
+
+        if (Physics.Raycast(transform.position + new Vector3(0f, 0.3f, -0.1f), Vector3.down, out hit, 1f, blockMask))
+        {
+           stairBlock = hit.collider.GetComponent<StairBlock>();
         }
     }
 
@@ -35,11 +47,18 @@ public class Door : MonoBehaviour
 
         if (Physics.Raycast(transform.position + new Vector3(0f, 0.3f, -0.1f), Vector3.down, out hit, 1f, blockMask))
         {
-            if (hit.collider.gameObject.tag.Contains("Player"))
+            if (stairBlock.blockNum != 5)
             {
                 openDoor();
 
                 var materialToSet = hit.collider.gameObject.GetComponent<MeshRenderer>().material;
+
+                for (int i = 0; i < sphereParticles.Length; i++)
+                {
+                    ParticleSystem.MainModule psmain = sphereParticles[i].main;
+                    psmain.startColor = materialToSet.color;
+                    sphereParticles[i].Play();
+                }
 
                 for (int i = 0; i < renderersToChange.Length; i++)
                 {
@@ -48,7 +67,7 @@ public class Door : MonoBehaviour
 
                 if (lastDoor)
                 {
-                    //finishGame.EndGame();
+                    finishGame.EndGame();
                 }
             }
         }
